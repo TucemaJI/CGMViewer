@@ -47,7 +47,7 @@ namespace CGM2SVG
       {
         doc.WriteAttributeString("clip-path", "url(#" + context.CurrClipID + ")");
       }
-      doc.WriteEndElement();
+      doc.WriteFullEndElement();
     }
 
     public void UpdateSVGfFigure(XmlTextWriter doc, SVGContext context)
@@ -69,7 +69,7 @@ namespace CGM2SVG
       {
         doc.WriteAttributeString("clip-path", "url(#" + context.CurrClipID + ")");
       }
-      doc.WriteEndElement();
+      doc.WriteFullEndElement();
     }
   }
 

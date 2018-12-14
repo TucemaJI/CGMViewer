@@ -51,7 +51,7 @@ namespace CGM2SVG
       {
         doc.WriteAttributeString("clip-path", "url(#" + context.CurrClipID + ")");
       }
-      doc.WriteEndElement();
+      doc.WriteFullEndElement();
     }
   }
 

@@ -12,7 +12,7 @@ namespace CGMViewer.Controllers
   {
     public ActionResult Index()
     {
-      CGM2SVG.CGM2SVG cgmContex = new CGM2SVG.CGM2SVG(@"C:\Users\sergkondrashov\Desktop\ICN-S1000DBIKE-AAA-DA24000-0-C0419-12345-A-04-1.CGM");
+      CGM2SVG.CGM2SVG cgmContex = new CGM2SVG.CGM2SVG(@"D:\CGMs\ICN-BD700-A-J212301-G-3AB48-03702-A-001-01.CGM");
 
       cgmContex.Run();
       var xml = cgmContex.GetSVGString();

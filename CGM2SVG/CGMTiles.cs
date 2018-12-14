@@ -108,7 +108,7 @@ namespace CGM2SVG
         doc.WriteAttributeString("width", (Math.Floor(mycontext.fscale((double)(((float)this.TileSize.Width) / this.PointSize.Width)))).ToString());
         doc.WriteAttributeString("height", (Math.Ceiling(mycontext.fscale((double)(((float)this.TileSize.Height) / this.PointSize.Height)))).ToString());
         doc.WriteAttributeString("href", "http://www.w3.org/1999/xlink", "data:;base64," + Convert.ToBase64String(stream.ToArray()));
-        doc.WriteEndElement();
+        doc.WriteFullEndElement();
       }
     }
   }

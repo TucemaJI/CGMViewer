@@ -52,7 +52,7 @@ namespace CGM2SVG
           break;
 
         case 5:
-          myxml.WriteEndElement();
+          myxml.WriteFullEndElement();
           break;
 
         case 8:
@@ -116,7 +116,7 @@ namespace CGM2SVG
           break;
 
         case 0x17:
-          myxml.WriteEndElement();
+          myxml.WriteFullEndElement();
           break;
 
         default:

@@ -77,7 +77,7 @@ namespace CGM2SVG
         }
       }
       doc.WriteString(this.Text);
-      doc.WriteEndElement();
+      doc.WriteFullEndElement();
     }
 
     public void UpdateSVGwContext(XmlTextWriter doc, SVGContext mycontext)
@@ -199,8 +199,8 @@ namespace CGM2SVG
       //  }
       //}
       //doc.WriteString(text);
-      doc.WriteEndElement();
-      doc.WriteEndElement();
+      doc.WriteFullEndElement();
+      doc.WriteFullEndElement();
     }
   }
 

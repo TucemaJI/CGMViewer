@@ -32,7 +32,7 @@ namespace CGM2SVG
 
     public void CreateEndSVGLink(ref XmlTextWriter doc, SVGContext context)
     {
-      doc.WriteEndElement();
+      doc.WriteFullEndElement();
       this.isLinked = false;
     }
 

@@ -45,7 +45,7 @@ namespace CGM2SVG
       doc.WriteAttributeString("d", str);
       doc.WriteAttributeString("fill", "none");
       context.PrintLine(doc);
-      doc.WriteEndElement();
+      doc.WriteFullEndElement();
     }
   }
 }

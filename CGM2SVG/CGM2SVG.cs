@@ -209,7 +209,7 @@ namespace CGM2SVG
           xw.WriteEndElement();
         }
       }
-      xw.WriteEndElement();
+      xw.WriteFullEndElement();
       xw.WriteEndDocument();
     }
 
@@ -231,8 +231,14 @@ namespace CGM2SVG
       XmlNamespaceManager nsMgr = new XmlNamespaceManager(new NameTable());
       nsMgr.AddNamespace("xlink", "http://www.w3.org/1999/xlink");
       nsMgr.AddNamespace("qsvg", "http://www.docsoft.com/qsvg");
-      XmlParserContext context = new XmlParserContext(null, nsMgr, "", XmlSpace.Default);
+      XmlParserContext context = new XmlParserContext(nsMgr.NameTable, nsMgr, null, XmlSpace.Default);
       XmlTextReader reader = new XmlTextReader(this.@ref.mystream, XmlNodeType.Document, context);
+
+            //@ref.mystream.Position = 0;
+            //StreamReader rea = new StreamReader(@ref.mystream);
+            //string text = rea.ReadToEnd();
+            //File.WriteAllText("D:/temp.txt", text);
+
       try
       {
         document.Load((XmlReader)reader);

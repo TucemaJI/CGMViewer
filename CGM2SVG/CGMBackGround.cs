@@ -14,7 +14,7 @@ namespace CGM2SVG
         doc.WriteAttributeString("height", mycontext.rh.ToString());
         doc.WriteAttributeString("fill", mycontext.Back.ToString());
         doc.WriteAttributeString("qsvg:element", "background");
-        doc.WriteEndElement();
+        doc.WriteFullEndElement();
         mycontext.backgroundProduced = true;
       }
     }

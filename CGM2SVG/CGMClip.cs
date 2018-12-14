@@ -37,8 +37,8 @@ namespace CGM2SVG
       doc.WriteAttributeString("y", this.ClipPoint1.Y.ToString());
       doc.WriteAttributeString("width",  Math.Abs(decimal.Subtract(this.ClipPoint2.X, this.ClipPoint1.X)).ToString());
       doc.WriteAttributeString("height", Math.Abs(decimal.Subtract(this.ClipPoint2.Y, this.ClipPoint1.Y)).ToString());
-      doc.WriteEndElement();
-      doc.WriteEndElement();
+      doc.WriteFullEndElement();
+      doc.WriteFullEndElement();
     }
   }
 

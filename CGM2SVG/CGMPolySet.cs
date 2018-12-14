@@ -86,13 +86,13 @@ namespace CGM2SVG
       doc.WriteAttributeString("fill", context.fill);
       doc.WriteAttributeString("fill-rule", "evenodd");
       doc.WriteAttributeString("stroke", "none");
-      doc.WriteEndElement();
+      doc.WriteFullEndElement();
       doc.WriteStartElement("path");
       doc.WriteAttributeString("d", this.strokepath);
       doc.WriteAttributeString("fill", "none");
       context.PrintEdge(doc);
-      doc.WriteEndElement();
-      doc.WriteEndElement();
+      doc.WriteFullEndElement();
+      doc.WriteFullEndElement();
     }
   }
 }

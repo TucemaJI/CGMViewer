@@ -35,7 +35,7 @@ namespace CGM2SVG
 
     public void Complete()
     {
-      this.myxml.WriteEndElement();
+      this.myxml.WriteFullEndElement();
       this.myxml.Flush();
     }
 
