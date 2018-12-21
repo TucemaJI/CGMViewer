@@ -320,7 +320,8 @@ namespace CGM2SVG
         finally
         {
           this.@ref.Complete();
-        }
+                    this.@ref.Complete();
+                }
       }
       finally
       {

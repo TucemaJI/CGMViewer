@@ -104,53 +104,59 @@ namespace CGM2SVG
       this.cd2.Y = this.center.Y;
     }
 
-    public void UpdateSVG(XmlTextWriter doc, SVGContext context)
-    {
-      PointDbl dbl6 = new PointDbl(context.fxy(this.center));
-      PointDbl p = dbl6;
-      dbl6 = new PointDbl(context.fxy(this.cd1));
-      PointDbl dbl2 = dbl6;
-      dbl6 = new PointDbl(context.fxy(this.cd2));
-      PointDbl dbl3 = dbl6;
-      dbl6 = new PointDbl(this.context_fxy2(this.v1, context));
-      PointDbl dbl4 = dbl6;
-      dbl6 = new PointDbl(this.context_fxy2(this.v2, context));
-      PointDbl dbl5 = dbl6;
-      SVGEllipseArc arc = CGM2SVGMath.FindSVGArc(p, dbl2, dbl3, dbl4, dbl5);
-      string dAttribute = arc.dAttribute;
-      string transformAttribute = arc.transformAttribute;
-      switch (this.closingType)
-      {
-        case 0:
-          dAttribute = dAttribute + string.Format(" L{0},{1} L{2},{3} Z", new object[] { arc.CenterP.X, arc.CenterP.Y, arc.StartP.X, arc.StartP.Y });
-          break;
+        public void UpdateSVG(XmlTextWriter doc, SVGContext context)
+        {
+            try
+            {
+                PointDbl dbl6 = new PointDbl(context.fxy(this.center));
+                PointDbl p = dbl6;
+                dbl6 = new PointDbl(context.fxy(this.cd1));
+                PointDbl dbl2 = dbl6;
+                dbl6 = new PointDbl(context.fxy(this.cd2));
+                PointDbl dbl3 = dbl6;
+                dbl6 = new PointDbl(this.context_fxy2(this.v1, context));
+                PointDbl dbl4 = dbl6;
+                dbl6 = new PointDbl(this.context_fxy2(this.v2, context));
+                PointDbl dbl5 = dbl6;
+                SVGEllipseArc arc = CGM2SVGMath.FindSVGArc(p, dbl2, dbl3, dbl4, dbl5);
+                string dAttribute = arc.dAttribute;
+                string transformAttribute = arc.transformAttribute;
+                switch (this.closingType)
+                {
+                    case 0:
+                        dAttribute = dAttribute + string.Format(" L{0},{1} L{2},{3} Z", new object[] { arc.CenterP.X, arc.CenterP.Y, arc.StartP.X, arc.StartP.Y });
+                        break;
 
-        case 1:
-          dAttribute = dAttribute + string.Format(" L{0},{1} Z", arc.StartP.X, arc.StartP.Y);
-          break;
-      }
-      doc.WriteStartElement("path");
-      doc.WriteAttributeString("d", dAttribute);
-      if (!String.IsNullOrEmpty(transformAttribute)) //if (StringType.StrCmp(transformAttribute, "", false) != 0)
-      {
-        doc.WriteAttributeString("transform", transformAttribute);
-      }
-      if (this.closingType >= 0)
-      {
-        context.PrintEdgeArc(doc);
-        doc.WriteAttributeString("fill", context.fill);
-      }
-      else
-      {
-        context.PrintLine(doc);
-        doc.WriteAttributeString("fill", "none");
-      }
-      if (context.isClip & !String.IsNullOrEmpty(context.CurrClipID)) //if (context.isClip & (StringType.StrCmp(context.CurrClipID, "", false) != 0))
-      {
-        doc.WriteAttributeString("clip-path", "url(#" + context.CurrClipID + ")");
-      }
-      doc.WriteFullEndElement();
-    }
+                    case 1:
+                        dAttribute = dAttribute + string.Format(" L{0},{1} Z", arc.StartP.X, arc.StartP.Y);
+                        break;
+                }
+                doc.WriteStartElement("path");
+                doc.WriteAttributeString("d", dAttribute);
+                if (!String.IsNullOrEmpty(transformAttribute)) //if (StringType.StrCmp(transformAttribute, "", false) != 0)
+                {
+                    doc.WriteAttributeString("transform", transformAttribute);
+                }
+                if (this.closingType >= 0)
+                {
+                    context.PrintEdgeArc(doc);
+                    doc.WriteAttributeString("fill", context.fill);
+                }
+                else
+                {
+                    context.PrintLine(doc);
+                    doc.WriteAttributeString("fill", "none");
+                }
+            }
+            finally
+            {
+                if (context.isClip & !String.IsNullOrEmpty(context.CurrClipID)) //if (context.isClip & (StringType.StrCmp(context.CurrClipID, "", false) != 0))
+                {
+                    doc.WriteAttributeString("clip-path", "url(#" + context.CurrClipID + ")");
+                }
+                doc.WriteFullEndElement();
+            }
+        }
   }
 
 

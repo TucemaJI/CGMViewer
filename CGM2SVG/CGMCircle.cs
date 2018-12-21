@@ -23,21 +23,27 @@ namespace CGM2SVG
       return str;
     }
 
-    public void UpdateSVG(XmlTextWriter doc, SVGContext context)
-    {
-      this.center = context.fxy(this.center);
-      doc.WriteStartElement("circle");
-      doc.WriteAttributeString("cx", this.center.X.ToString());
-      doc.WriteAttributeString("cy", this.center.Y.ToString());
-      doc.WriteAttributeString("r", context.fscale((double)this.radius).ToString());
-      context.PrintEdge(doc);
-      doc.WriteAttributeString("fill", context.fill);
-      if (context.isClip & !String.IsNullOrEmpty(context.CurrClipID))//if (context.isClip & (StringType.StrCmp(context.CurrClipID, "", false) != 0))
-      {
-        doc.WriteAttributeString("clip-path", "url(#" + context.CurrClipID + ")");
-      }
-      doc.WriteFullEndElement();
-    }
+        public void UpdateSVG(XmlTextWriter doc, SVGContext context)
+        {
+            try
+            {
+                this.center = context.fxy(this.center);
+                doc.WriteStartElement("circle");
+                doc.WriteAttributeString("cx", this.center.X.ToString());
+                doc.WriteAttributeString("cy", this.center.Y.ToString());
+                doc.WriteAttributeString("r", context.fscale((double)this.radius).ToString());
+                context.PrintEdge(doc);
+            }
+            finally
+            {
+                doc.WriteAttributeString("fill", context.fill);
+                if (context.isClip & !String.IsNullOrEmpty(context.CurrClipID))//if (context.isClip & (StringType.StrCmp(context.CurrClipID, "", false) != 0))
+                {
+                    doc.WriteAttributeString("clip-path", "url(#" + context.CurrClipID + ")");
+                }
+                doc.WriteFullEndElement();
+            }
+        }
   }
 
 

@@ -26,29 +26,35 @@ namespace CGM2SVG
       return ("M" + str2 + " Z");
     }
 
-    public void UpdateSVG(XmlTextWriter doc, SVGContext context)
-    {
-      string[] strArray = new string[(this.points.Length - 1) + 1];
-      int num2 = strArray.Length - 1;
-      for (int i = 0; i <= num2; i++)
-      {
-        strArray[i] = context.fx(Convert.ToDouble(this.points[i].X)).ToString() + "," + context.fy(Convert.ToDouble(this.points[i].Y)).ToString();
-      }
-      if (context.interiorstyle == 3)
-      {
-        context.getHatch(doc);
-      }
-      doc.WriteStartElement("polygon");
-      doc.WriteAttributeString("points", string.Join(" ", strArray));
-      doc.WriteAttributeString("fill", context.fill);
-      doc.WriteAttributeString("fill-rule", "evenodd");
-      context.PrintEdge(doc);
-      if (context.isClip & !String.IsNullOrEmpty(context.CurrClipID)) //if (context.isClip & (StringType.StrCmp(context.CurrClipID, "", false) != 0))
-      {
-        doc.WriteAttributeString("clip-path", "url(#" + context.CurrClipID + ")");
-      }
-      doc.WriteFullEndElement();
-    }
+        public void UpdateSVG(XmlTextWriter doc, SVGContext context)
+        {
+            try
+            {
+                string[] strArray = new string[(this.points.Length - 1) + 1];
+                int num2 = strArray.Length - 1;
+                for (int i = 0; i <= num2; i++)
+                {
+                    strArray[i] = context.fx(Convert.ToDouble(this.points[i].X)).ToString() + "," + context.fy(Convert.ToDouble(this.points[i].Y)).ToString();
+                }
+                if (context.interiorstyle == 3)
+                {
+                    context.getHatch(doc);
+                }
+                doc.WriteStartElement("polygon");
+                doc.WriteAttributeString("points", string.Join(" ", strArray));
+                doc.WriteAttributeString("fill", context.fill);
+                doc.WriteAttributeString("fill-rule", "evenodd");
+                context.PrintEdge(doc);
+            }
+            finally
+            {
+                if (context.isClip & !String.IsNullOrEmpty(context.CurrClipID)) //if (context.isClip & (StringType.StrCmp(context.CurrClipID, "", false) != 0))
+                {
+                    doc.WriteAttributeString("clip-path", "url(#" + context.CurrClipID + ")");
+                }
+                doc.WriteFullEndElement();
+            }
+        }
 
     public void UpdateSVGfFigure(XmlTextWriter doc, SVGContext context)
     {

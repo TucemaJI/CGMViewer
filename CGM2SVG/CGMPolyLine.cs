@@ -23,22 +23,28 @@ namespace CGM2SVG
     }
 
     public void UpdateSVG(XmlTextWriter doc, SVGContext context)
-    {
-      string str = "none";
-      if ((context.interiorstyle == 3) & context.fingureOn)
-      {
-        context.getHatch(doc);
-        str = "url(#" + context.HatchIndex.ToString() + ")";
-      }
-      doc.WriteStartElement("path");
-      doc.WriteAttributeString("d", this.GetPath(context));
-      doc.WriteAttributeString("fill", str);
-      context.PrintLine(doc);
-      if (context.isClip & !String.IsNullOrEmpty(context.CurrClipID))//if (context.isClip & (StringType.StrCmp(context.CurrClipID, "", false) != 0))
-      {
-        doc.WriteAttributeString("clip-path", "url(#" + context.CurrClipID + ")");
-      }
-      doc.WriteFullEndElement();
+        {
+            try
+            {
+                string str = "none";
+                if ((context.interiorstyle == 3) & context.fingureOn)
+                {
+                    context.getHatch(doc);
+                    str = "url(#" + context.HatchIndex.ToString() + ")";
+                }
+                doc.WriteStartElement("path");
+                doc.WriteAttributeString("d", this.GetPath(context));
+                doc.WriteAttributeString("fill", str);
+                context.PrintLine(doc);
+            }
+            finally
+            {
+                if (context.isClip & !String.IsNullOrEmpty(context.CurrClipID))//if (context.isClip & (StringType.StrCmp(context.CurrClipID, "", false) != 0))
+                {
+                    doc.WriteAttributeString("clip-path", "url(#" + context.CurrClipID + ")");
+                }
+                doc.WriteFullEndElement();
+            }
     }
   }
 
